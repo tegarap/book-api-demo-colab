@@ -9,6 +9,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func GetBooksController(c echo.Context) error {
+	books, err := database.GetBooks()
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": "success get one book",
+		"book":     books,
+	})
+}
+
 func GetOneBookController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -41,4 +52,20 @@ func CreateBookController(c echo.Context) error {
 		"book":     book,
 	})
 
+}
+
+func DeleteBookController(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	message, err := database.DeleteBook(id)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": message,
+	})
 }
