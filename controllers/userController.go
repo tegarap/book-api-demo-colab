@@ -92,5 +92,6 @@ func UpdateUserController(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": fmt.Sprintf("success update user with id %d", id),
+		"user" : user,
 	})
 }

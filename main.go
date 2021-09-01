@@ -1,17 +1,11 @@
 package main
 
 import (
-	"fmt"
-
-	"book-api-demo/controllers"
-
-	"github.com/labstack/echo/v4"
+	"book-api-demo/routes"
 )
 
 func main() {
-	fmt.Println("hello")
+	e := routes.New()
 
-
-
-	c.Logger.Fatal(c.Start(":1323"))
+	e.Logger.Fatal(e.Start(":1323"))
 }
