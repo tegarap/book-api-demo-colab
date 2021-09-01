@@ -9,6 +9,7 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 	e.GET("/books/:id", controllers.GetOneBookController)
+	e.POST("/books", controllers.CreateBookController)
 
 	return e
 }
