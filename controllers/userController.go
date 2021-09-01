@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	echo2 "github.com/labstack/echo"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -62,7 +61,7 @@ func GetUser(c echo.Context) error {
 
 }
 
-func DeleteUserController(c echo2.Context) error {
+func DeleteUserController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())

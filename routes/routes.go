@@ -12,6 +12,7 @@ func New() *echo.Echo {
 	e.DELETE("/users/:id", controllers.DeleteUserController)
 
 	//Book
+	e.GET("/books", controllers.GetBooksController)
 	e.GET("/books/:id", controllers.GetOneBookController)
 	e.POST("/books", controllers.CreateBookController)
 	e.DELETE("/books/:id", controllers.DeleteBookController)
