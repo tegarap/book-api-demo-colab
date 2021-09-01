@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	echo2 "github.com/labstack/echo"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -59,4 +60,23 @@ func GetUser(c echo.Context) error {
 		"users":    user,
 	})
 
+}
+
+func DeleteUserController(c echo2.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	_, e := database.GetUser(id)
+	if e != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, e.Error())
+	} else {
+		_, err := database.DeleteUser(id)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusBadRequest, e.Error())
+		}
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": fmt.Sprintf("success delete user with id %d", id),
+	})
 }
