@@ -15,3 +15,13 @@ func GetOneBook(id int) (interface{}, int, error) {
 
 	return book, 1, nil
 }
+
+func CreateNewBook(book *models.Book) (interface{}, error) {
+	err := config.Db.Create(&book).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return book, nil
+}

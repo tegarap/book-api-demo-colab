@@ -13,6 +13,7 @@ func New() *echo.Echo {
 
 	//Book
 	e.GET("/books/:id", controllers.GetOneBookController)
+	e.POST("/books", controllers.CreateBookController)
 
 	return e
 }
