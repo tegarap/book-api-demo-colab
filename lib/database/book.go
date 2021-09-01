@@ -25,3 +25,12 @@ func CreateNewBook(book *models.Book) (interface{}, error) {
 
 	return book, nil
 }
+
+func DeleteBook(id int) (interface{}, error) {
+	var book []models.Book
+	err := config.Db.Delete(&book, id).Error
+	if err != nil {
+		return nil, err
+	}
+	return "deleted", nil
+}

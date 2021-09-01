@@ -42,3 +42,19 @@ func CreateBookController(c echo.Context) error {
 	})
 
 }
+
+func DeleteBookController(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	message, err := database.DeleteBook(id)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": message,
+	})
+}
