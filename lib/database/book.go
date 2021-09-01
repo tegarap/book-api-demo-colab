@@ -42,3 +42,23 @@ func DeleteBook(id int) (interface{}, error) {
 	}
 	return "deleted", nil
 }
+
+func UpdateBook(id int, newBook *models.Book) (interface{}, int, error) {
+	var book models.Book
+	tx1 := config.Db.Find(&book, id)
+
+	if tx1.Error != nil {
+		return nil, 0, tx1.Error
+	}
+
+	if tx1.RowsAffected > 0 {
+		tx := config.Db.Model(&book).Updates(newBook)
+
+		if tx.Error != nil {
+			return nil, 0, tx.Error
+		}
+
+		return book, 1, nil
+	}
+	return nil, 0, nil
+}
