@@ -79,3 +79,18 @@ func DeleteUserController(c echo.Context) error {
 		"messages": fmt.Sprintf("success delete user with id %d", id),
 	})
 }
+
+func UpdateUserController(c echo.Context) error {
+	id, e := strconv.Atoi(c.Param("id"))
+	if e != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, e.Error())
+	}
+	usr := models.Users{}
+	user, err := database.UpdateUser(id, &usr)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusForbidden, err.Error())
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": fmt.Sprintf("success update user with id %d", id),
+	})
+}

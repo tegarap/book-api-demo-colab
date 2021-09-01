@@ -9,7 +9,11 @@ import (
 func New() *echo.Echo {
 	e := echo.New()
 	// User
+	e.GET("/users", controllers.GetUsers)
+	e.POST("/users", controllers.CreateUser)
+	e.GET("/users/:id", controllers.GetUser)
 	e.DELETE("/users/:id", controllers.DeleteUserController)
+	e.PUT("/users/:id", controllers.UpdateUserController)
 
 	//Book
 	e.GET("/books", controllers.GetBooksController)

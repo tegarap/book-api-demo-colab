@@ -45,3 +45,25 @@ func DeleteUser(id int) (interface{}, error) {
 	}
 	return user, nil
 }
+
+func UpdateUser(id int, usr *models.Users) (interface{}, error) {
+	user := models.Users{}
+	e := config.Db.First(&user, id)
+	if e.Error != nil {
+		return nil, e.Error
+	}
+	if e.RowsAffected > 0 {
+		if usr.Name != "" {
+			user.Name = usr.Name
+		}
+		if usr.Email != "" {
+			user.Email = usr.Email
+		}
+		if usr.Password != "" {
+			user.Password = usr.Password
+		}
+		config.Db.Save(&user)
+		return &user, nil
+	}
+	return nil, e.Error
+}
