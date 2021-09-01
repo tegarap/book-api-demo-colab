@@ -20,6 +20,7 @@ func New() *echo.Echo {
 	e.GET("/books/:id", controllers.GetOneBookController)
 	e.POST("/books", controllers.CreateBookController)
 	e.DELETE("/books/:id", controllers.DeleteBookController)
+	e.PUT("/books/:id", controllers.UpdateBookController)
 
 	return e
 }
