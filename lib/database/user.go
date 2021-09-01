@@ -37,3 +37,11 @@ func CreateUser(user models.Users) (models.Users, error) {
 	return user, nil
 
 }
+
+func DeleteUser(id int) (interface{}, error) {
+	user := models.Users{}
+	if e := config.Db.Delete(&user, id).Error; e != nil {
+		return nil, e
+	}
+	return user, nil
+}
